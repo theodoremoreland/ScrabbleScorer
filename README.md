@@ -12,15 +12,15 @@ A program that accepts user input in the form of a word and returns a Scrabble s
 
 # Scrabble (Algo 1)
 
-<img src="presentation/2.PNG" width="900">
-<img src="presentation/3.PNG" width="900">
+<img src="presentation/2.PNG" width="600">
+<img src="presentation/3.PNG" width="700">
 
 
 # Simple Score (Algo 2)
 
-<img src="presentation/4.PNG" width="900">
+<img src="presentation/4.PNG" width="700">
 
 
 # Bonus Vowels (Algo 3)
 
-<img src="presentation/5.PNG" width="900">
+<img src="presentation/5.PNG" width="700">
