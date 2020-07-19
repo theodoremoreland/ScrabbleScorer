@@ -62,5 +62,3 @@ function runProgram(algorithms, variant) {
 
 
 runProgram(scoringAlgorithms, prompt_for_variant);
-
-
