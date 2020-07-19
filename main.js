@@ -5,9 +5,9 @@ const scoringAlgorithms = require("./scripts/scoringAlgorithms")
 // Effects for stdout.
 const blink = '\x1b[5m%s\x1b[0m';
 const cyan = '\x1b[36m%s\x1b[0m';
-const red = '\x1b[31m%s\x1b[0m';
+const green = '\x1b[32m%s\x1b[0m';
 const yellow = '\x1b[33m%s\x1b[0m';
-const blue = '\x1b[34m%s\x1b[0m';
+const red = '\x1b[31m%s\x1b[0m';
 
 
 function prompt_for_variant() {
@@ -52,7 +52,7 @@ function runProgram(algorithms, variant) {
     }
     else {
       let score = algorithms[variant].scoreFunction(word);
-      let color = score === 0 ? red : (score < 10 ? yellow : (score < 20 ? cyan : blink));
+      let color = score < 5 ? cyan : (score < 10 ? green : (score < 20 ? yellow : red));
       console.log(color, `Score for "${word}" is ${score} points!\n`);
     }
     return runProgram(algorithms, variant);
