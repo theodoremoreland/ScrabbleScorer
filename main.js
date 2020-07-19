@@ -23,7 +23,7 @@ function prompt_for_variant() {
   console.log(blink, `Welcome to Scrabble Scorer! ${quit}\n`);
 
   algorithm = input.question(intro, { hideEchoBack: false, mask: '', limit: ["1", "2", "3", "q", "r"] });
-  algorithm = +algorithm - 1;
+  algorithm = isNaN(algorithm) ? algorithm : +algorithm - 1;
 
   console.clear();
 
