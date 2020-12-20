@@ -1,0 +1,23 @@
+{
+  "name": "ScrabbleScorer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theodoremoreland/ScrabbleScorer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theodoremoreland/ScrabbleScorer/issues"
+  },
+  "homepage": "https://github.com/theodoremoreland/ScrabbleScorer#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
