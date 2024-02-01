@@ -1,4 +1,4 @@
-import "./utility.js";
+import "./String.js";
 
 const oldScoreKey = {
   1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
