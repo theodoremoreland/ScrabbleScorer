@@ -1,8 +1,11 @@
-// First party
+// Third party
+import checkWord from "check-word";
 import { question } from "readline-sync";
 
 // Custom
 import { scoringAlgorithms } from "./modules/scoringAlgorithms.js";
+
+const words = checkWord("en");
 
 // Effects for stdout.
 const blink = "\x1b[5m%s\x1b[0m";
@@ -54,6 +57,8 @@ function runProgram(algorithms, variant) {
       variant = "q";
     } else if (word === "r") {
       variant = "r";
+    } else if (!words.check(word.toLowerCase())) {
+      console.log(red, `Sorry, "${word}" is not a valid word.\n`);
     } else {
       const score = algorithms[variant].scoreFunction(word);
       const color =
