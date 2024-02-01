@@ -1,6 +1,8 @@
-// Imports.
-const input = require("readline-sync");
-const scoringAlgorithms = require("./modules/scoringAlgorithms");
+// First party
+import { question } from "readline-sync";
+
+// Custom
+import { scoringAlgorithms } from "./modules/scoringAlgorithms.js";
 
 // Effects for stdout.
 const blink = "\x1b[5m%s\x1b[0m";
@@ -21,7 +23,7 @@ function promptForVariant() {
 
   console.log(blink, `Welcome to Scrabble Scorer! ${quit}\n`);
 
-  algorithm = input.question(intro, {
+  let algorithm = question(intro, {
     hideEchoBack: false,
     mask: "",
     limit: ["1", "2", "3", "q", "r"],
@@ -43,7 +45,7 @@ function runProgram(algorithms, variant) {
   } else {
     console.log(`Using algorithm: "${scoringAlgorithms[variant].name}"\n`);
 
-    const word = input.question("Type your word...", {
+    const word = question("Type your word...", {
       hideEchoBack: false,
       mask: "",
     });
