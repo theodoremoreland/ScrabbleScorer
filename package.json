@@ -1,5 +1,6 @@
 {
   "name": "scrabblescorer",
+  "type": "module",
   "version": "1.0.0",
   "description": "A program that accepts user input in the form of a word and returns a Scrabble score relative to one of three scoring algorithms.\r * The first algorithm, \"Scrabble\" awards points relative to the letter's rarity.\r * The second algorithm, \"Simple Score\" awards one point for every letter.\r * The third algorithm, \"Bonus Vowels\" awards three points for vowels, one point for consonants.",
   "main": "main.js",
@@ -7,5 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
