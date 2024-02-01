@@ -1,6 +1,6 @@
 // Imports.
 const input = require("readline-sync");
-const scoringAlgorithms = require("./scripts/scoringAlgorithms");
+const scoringAlgorithms = require("./modules/scoringAlgorithms");
 
 // Effects for stdout.
 const blink = "\x1b[5m%s\x1b[0m";
