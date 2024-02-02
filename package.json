@@ -7,8 +7,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theodoremoreland/ScrabbleScorer.git"
+  },
+  "author": "Theodore Moreland",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theodoremoreland/ScrabbleScorer/issues"
+  },
+  "homepage": "https://github.com/theodoremoreland/ScrabbleScorer#readme",
   "dependencies": {
     "check-word": "^1.1.0",
     "readline-sync": "^1.4.10"
