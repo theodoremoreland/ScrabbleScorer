@@ -1,5 +1,6 @@
 String.prototype.isVowel = function () {
   let vowels = ["a", "e", "i", "o", "u"];
+
   if (vowels.includes(this[0].toLowerCase())) {
     return 3;
   } else if (this[0] === " ") {
