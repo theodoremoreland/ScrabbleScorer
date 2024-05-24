@@ -12,8 +12,8 @@ const port = process?.env?.PORT ? Number(process.env.PORT) : 8080;
 const app = express();
 const server = http.createServer(app);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename: string = fileURLToPath(import.meta.url);
+const __dirname: string = path.dirname(__filename);
 
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
