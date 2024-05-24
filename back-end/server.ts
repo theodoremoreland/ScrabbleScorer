@@ -1,16 +1,16 @@
 // Native modules
-import http from "http";
+import http, { Server } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
 
 // Third-party
-import express from "express";
+import express, { Express } from "express";
 
-const port = process?.env?.PORT ? Number(process.env.PORT) : 8080;
+const port: number = process?.env?.PORT ? Number(process.env.PORT) : 8080;
 
 // Server initialization
-const app = express();
-const server = http.createServer(app);
+const app: Express = express();
+const server: Server = http.createServer(app);
 
 const __filename: string = fileURLToPath(import.meta.url);
 const __dirname: string = path.dirname(__filename);
