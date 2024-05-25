@@ -12,7 +12,7 @@ import {
   ScoringAlgorithmName,
   isScoringAlgorithmName,
   scoreWord,
-} from "./modules/scoringAlgorithms.ts";
+} from "./modules/scoringAlgorithms";
 
 const port: number = process?.env?.PORT ? Number(process.env.PORT) : 8080;
 
@@ -39,21 +39,29 @@ app.get("score-word", (req, res) => {
   const scoringAlgorithmName = req.query.scoringAlgorithmName;
 
   if (typeof word !== "string" || typeof scoringAlgorithmName !== "string") {
-    return res.status(400).send("Query parameters 'word' and 'scoringAlgorithmName' must be strings.");
+    return res
+      .status(400)
+      .send("Query parameters 'word' and 'scoringAlgorithmName' must be strings.");
   }
 
   if (!isScoringAlgorithmName(scoringAlgorithmName)) {
-    return res.status(400).send(`"${scoringAlgorithmName}" is not a valid scoring algorithm. Must be one of ${Object.values(ScoringAlgorithmName).join(", ")}.`);
+    return res
+      .status(400)
+      .send(`"${scoringAlgorithmName}" is not a valid scoring algorithm. Must be one of ${Object.values(ScoringAlgorithmName).join(", ")}.`);
   }
 
   try {
     const score: number = scoreWord(word, scoringAlgorithmName);
 
-    return res.status(200).json({ score });
+    return res
+      .status(200)
+      .json({ score });
   } catch (error) {
-    const errorMessage: string = typeof Error ? error.message : String(error);
+    const errorMessage: string = error instanceof Error ? error.message : String(error);
 
-    return res.status(400).send(errorMessage);
+    return res
+      .status(400)
+      .send(errorMessage);
   }
 });
 
