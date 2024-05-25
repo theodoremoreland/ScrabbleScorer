@@ -5,13 +5,16 @@ import { fileURLToPath } from "url";
 
 // Third-party
 import express, { Express } from "express";
-import checkWord from "check-word";
 
 // Custom
-import { scoringAlgorithms } from "./modules/scoringAlgorithms.ts";
+import { 
+  scoringAlgorithms,
+  ScoringAlgorithmName,
+  isScoringAlgorithmName,
+  scoreWord,
+} from "./modules/scoringAlgorithms.ts";
 
 const port: number = process?.env?.PORT ? Number(process.env.PORT) : 8080;
-const words = checkWord("en");
 
 // Server initialization
 const app: Express = express();
@@ -27,15 +30,31 @@ app.get("/", (_, res) => {
   res.sendFile("index.html");
 });
 
-app.get("score-word", (req, res) => {
-  const word: string = req.query.word;
-  const scoringAlgorithm: string = req.query.scoringAlgorithm;
+app.get("/scoring-algorithms", (_, res) => {
+  res.json(scoringAlgorithms);
+});
 
-  if (!words.check(word)) {
-    res.status(400).send("Invalid word.");
+app.get("score-word", (req, res) => {
+  const word = req.query.word;
+  const scoringAlgorithmName = req.query.scoringAlgorithmName;
+
+  if (typeof word !== "string" || typeof scoringAlgorithmName !== "string") {
+    return res.status(400).send("Query parameters 'word' and 'scoringAlgorithmName' must be strings.");
   }
 
-  res.status(200);
+  if (!isScoringAlgorithmName(scoringAlgorithmName)) {
+    return res.status(400).send(`"${scoringAlgorithmName}" is not a valid scoring algorithm. Must be one of ${Object.values(ScoringAlgorithmName).join(", ")}.`);
+  }
+
+  try {
+    const score: number = scoreWord(word, scoringAlgorithmName);
+
+    return res.status(200).json({ score });
+  } catch (error) {
+    const errorMessage: string = typeof Error ? error.message : String(error);
+
+    return res.status(400).send(errorMessage);
+  }
 });
 
 server.listen(port, () => {

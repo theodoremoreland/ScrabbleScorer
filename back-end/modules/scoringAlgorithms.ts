@@ -1,3 +1,5 @@
+import checkWord from "check-word";
+
 type OldScoreKey = {
   [key: number]: string[];
 };
@@ -6,10 +8,22 @@ type NewScoreKey = {
   [key: string]: number;
 };
 
+export enum ScoringAlgorithmName {
+  Scrabble = "Scrabble",
+  SimpleScore = "Simple Score",
+  BonusVowels = "Bonus Vowels",
+}
+
 type ScoringAlgorithm = {
-  name: string;
+  name: ScoringAlgorithmName;
   description: string;
   scoreFunction: (word: string) => number;
+};
+
+const words = checkWord("en");
+
+export const isScoringAlgorithmName = (name: string): name is ScoringAlgorithmName => {
+  return name in ScoringAlgorithmName;
 };
 
 const transform = (oldScoreKey: OldScoreKey): NewScoreKey => {
@@ -53,7 +67,7 @@ const scoreVowel = (char: string): 0 | 1 | 3 => {
 };
 
 const scrabbleAlgorithm: ScoringAlgorithm = {
-  name: "Scrabble",
+  name: ScoringAlgorithmName.Scrabble,
   description: "The traditional scoring algorithm.",
   scoreFunction: (word: string): number => {
     let points: number = 0;
@@ -66,12 +80,12 @@ const scrabbleAlgorithm: ScoringAlgorithm = {
   },
 };
 const simpleScoreAlgorithm: ScoringAlgorithm =   {
-  name: "Simple Score",
+  name: ScoringAlgorithmName.SimpleScore,
   description: "Each letter is worth 1 point.",
   scoreFunction: (word: string): number => word.replace(" ", "").length,
 };
 const vowelBonusScoreAlgorithm: ScoringAlgorithm = {
-  name: "Bonus Vowels",
+  name: ScoringAlgorithmName.BonusVowels,
   description: "Vowels are 3 pts, consonants are 1pt.",
   scoreFunction: (word: string): number => {
     let points: number = 0;
@@ -89,3 +103,27 @@ export const scoringAlgorithms:  ScoringAlgorithm[] = [
   simpleScoreAlgorithm,
   vowelBonusScoreAlgorithm,
 ];
+
+export const scoreWord = (word: string, scoringAlgorithmName: ScoringAlgorithmName): number => {
+  const scoringAlgorithm = scoringAlgorithms.find(
+    (algorithm) => algorithm.name === scoringAlgorithmName
+  );
+
+  if (!scoringAlgorithm) {
+    throw new Error(
+      `"${scoringAlgorithmName}" is not a valid scoring algorithm. Must be one of ${Object.values(
+        ScoringAlgorithmName
+      ).join(", ")}.`
+    );
+  }
+
+  if (word.length === 0 || word.length > 15) {
+    throw new Error("Word must be between 1 and 15 characters.");
+  }
+
+  if (checkWord(word) === false) {
+    throw new Error(`"${word}" is not a valid word.`);
+  }
+
+  return scoringAlgorithm.scoreFunction(word);
+}
