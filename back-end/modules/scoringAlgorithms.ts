@@ -1,3 +1,4 @@
+// @ts-ignore
 import checkWord from "check-word";
 
 type OldScoreKey = {
@@ -27,7 +28,7 @@ export const isScoringAlgorithmName = (name: string): name is ScoringAlgorithmNa
 };
 
 const transform = (oldScoreKey: OldScoreKey): NewScoreKey => {
-  const newScoreKey = {};
+  const newScoreKey: NewScoreKey = {};
 
   for (let key in oldScoreKey) {
     for (let j = 0; j < oldScoreKey[key].length; j++) {
@@ -121,7 +122,7 @@ export const scoreWord = (word: string, scoringAlgorithmName: ScoringAlgorithmNa
     throw new Error("Word must be between 1 and 15 characters.");
   }
 
-  if (checkWord(word) === false) {
+  if (words.check(word) === false) {
     throw new Error(`"${word}" is not a valid word.`);
   }
 
