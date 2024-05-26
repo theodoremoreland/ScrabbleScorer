@@ -122,7 +122,7 @@ export const scoreWord = (word: string, scoringAlgorithmName: ScoringAlgorithmNa
     throw new Error("Word must be between 1 and 15 characters.");
   }
 
-  if (words.check(word) === false) {
+  if (words.check(word.toLowerCase()) === false) {
     throw new Error(`"${word}" is not a valid word.`);
   }
 
