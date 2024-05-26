@@ -4,6 +4,7 @@ import path from "path";
 
 // Third-party
 import express, { Express } from "express";
+import cors from "cors";
 
 // Custom
 import { 
@@ -20,6 +21,7 @@ const app: Express = express();
 const server: Server = http.createServer(app);
 
 // Middleware
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (_, res) => {
