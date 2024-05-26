@@ -30,10 +30,16 @@ app.get("/scoring-algorithms", (_, res) => {
   res.json(scoringAlgorithms);
 });
 
-app.get("score-word", (req, res) => {
+app.get("/score-word", (req, res) => {
   const word = req.query.word;
   const scoringAlgorithmName = req.query.scoringAlgorithmName;
 
+  if (!word || !scoringAlgorithmName) {
+    return res
+      .status(400)
+      .send("Query parameters 'word' and 'scoringAlgorithmName' are required.");
+  }
+  
   if (typeof word !== "string" || typeof scoringAlgorithmName !== "string") {
     return res
       .status(400)
