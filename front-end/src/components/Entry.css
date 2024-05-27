@@ -1,8 +1,71 @@
 .Entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
   input {
     color: var(--color-primary-highlight);
     outline: transparent;
     border: none;
     background-color: transparent;
+  }
+
+  select {
+    color: var(--color-primary-highlight);
+    background-color: transparent;
+    border: none;
+  }
+
+  .title {
+    color: var(--color-tertiary-highlight);
+  }
+
+  .input-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .results {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .letters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .letter {
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgb(82, 45, 0);
+    background-color: #c7a056;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
   }
 }

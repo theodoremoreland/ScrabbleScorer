@@ -1,11 +1,14 @@
 :root {
-  --color-primary: black;
-  --color-secondary: blue;
+  --color-primary: #282833;
+  --color-secondary: #3db6c2;
+  --color-tertiary: #ef4b2f;
 
-  --color-primary-highlight: white;
+  --color-primary-font: white;
+  --color-secondary-font: #274690;
+  --color-tertiary-font: #576ca8;
 }
 
 html {
-  color: var(--color-primary-highlight);
+  color: var(--color-primary-font);
   background-color: var(--color-primary);
 }

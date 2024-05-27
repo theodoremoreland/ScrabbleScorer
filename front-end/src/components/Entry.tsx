@@ -1,5 +1,5 @@
 // React
-import { ReactElement, useState, useRef } from 'react';
+import { ReactElement, useState, useRef, useEffect } from 'react';
 
 // Third party
 import { useQuery } from '@tanstack/react-query';
@@ -18,26 +18,28 @@ const Entry = (): ReactElement => {
     const [word, setWord] = useState<string | undefined>();
     const [scoringAlgorithmName] = useState<ScoringAlgorithmName>(ScoringAlgorithmName.Scrabble);
 
-    const { data: scoreData } = useQuery({ queryKey: ['score', word, scoringAlgorithmName], queryFn: () => getScore({ word: word as string, scoringAlgorithmName }), enabled: Boolean(word)});
-    const { data: scoringAlgorithmsData } = useQuery({queryKey: ['scoringAlgorithms'], queryFn: getScoringAlgorithms});
+    const { data: score } = useQuery({ queryKey: ['score', word, scoringAlgorithmName], queryFn: () => getScore({ word: word as string, scoringAlgorithmName }), enabled: Boolean(word)});
+    const { data: scoringAlgorithms } = useQuery({queryKey: ['scoringAlgorithms'], queryFn: getScoringAlgorithms});
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
     return (
         <div className='Entry'>
             <header>
-                <span className='title'>ScrabbleScorer</span><span className='algorithm'>[Scrabble]</span>
+                <span className='title'>ScrabbleScorer @</span>
+                <span className='algorithm'>
+                    [<select>
+                        {scoringAlgorithms && scoringAlgorithms.map((algorithm) => (
+                            <option key={algorithm.name} value={algorithm.name}>{algorithm.name}</option>
+                        ))}
+                    </select>
+                    ]
+                </span>
             </header>
-            <ul>
-                {scoringAlgorithmsData && scoringAlgorithmsData.map((algorithm) => (
-                <li key={algorithm.name}>
-                    <p>
-                    <strong>{algorithm.name}</strong>
-                    </p>
-                    <p>{algorithm.description}</p>
-                </li>
-                ))}
-            </ul>
             <div className='input-area'>
-                <span>{'> '}</span>
+                <span>{'>'}</span>
                 <input
                     ref={inputRef}
                     type="text"
@@ -48,7 +50,21 @@ const Entry = (): ReactElement => {
                     }}
                 />
             </div>
-            {scoreData && <span>{word} is worth {scoreData.score} points!</span>}
+            {score && word &&
+            <div className='results'>
+                <ul className='letters'>
+                    {word.split('').map((letter, index) => (
+                        <li 
+                            key={`${letter}@${index}`}
+                            className='letter'
+                        >
+                            {letter.toUpperCase()}
+                        </li>
+                    ))}
+                </ul>
+                <span>is worth {score.score} points!</span>
+            </div>
+            }
         </div>
     )
 }
