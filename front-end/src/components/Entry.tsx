@@ -1,5 +1,5 @@
 // React
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useRef } from 'react';
 
 // Third party
 import { useQuery } from '@tanstack/react-query';
@@ -13,10 +13,12 @@ import getScoringAlgorithms from '../http/getScoringAlgorithms';
 import './Entry.css';
 
 const Entry = (): ReactElement => {
-    const [word, setWord] = useState<string>('Test');
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const [word, setWord] = useState<string | undefined>();
     const [scoringAlgorithmName] = useState<ScoringAlgorithmName>(ScoringAlgorithmName.Scrabble);
 
-    const { data: scoreData } = useQuery({ queryKey: ['score', word, scoringAlgorithmName], queryFn: () => getScore({ word, scoringAlgorithmName }), enabled: Boolean(word)});
+    const { data: scoreData } = useQuery({ queryKey: ['score', word, scoringAlgorithmName], queryFn: () => getScore({ word: word as string, scoringAlgorithmName }), enabled: Boolean(word)});
     const { data: scoringAlgorithmsData } = useQuery({queryKey: ['scoringAlgorithms'], queryFn: getScoringAlgorithms});
 
     return (
@@ -37,9 +39,13 @@ const Entry = (): ReactElement => {
             <div className='input-area'>
                 <span>{'> '}</span>
                 <input
+                    ref={inputRef}
                     type="text"
-                    value={word}
-                    onChange={(e) => setWord(e.target.value)}
+                    onKeyUp={(e) => {
+                        if (e.key === 'Enter' && inputRef.current?.value) {
+                            setWord(inputRef.current?.value);
+                        }
+                    }}
                 />
             </div>
             {scoreData && <span>{word} is worth {scoreData.score} points!</span>}
