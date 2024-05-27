@@ -14,7 +14,9 @@
   }
 
   input {
+    font-family: custom-regular, sans-serif;
     color: var(--color-primary-highlight);
+    width: 100%;
     outline: transparent;
     border: none;
     background-color: transparent;
@@ -22,8 +24,13 @@
 
   select {
     color: var(--color-tertiary);
+    font-family: custom-regular, sans-serif;
     background-color: transparent;
     border: none;
+
+    option {
+      color: var(--color-primary);
+    }
   }
 
   .title {
@@ -36,6 +43,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 0.5rem;
+    width: 100%;
   }
 
   .results {
@@ -47,6 +55,7 @@
   }
 
   .letters {
+    font-family: custom-regular, sans-serif;
     display: flex;
     flex-direction: row;
     align-items: center;
