@@ -28,7 +28,8 @@ const Entry = (): ReactElement => {
     return (
         <div className='Entry'>
             <header>
-                <span className='title'>ScrabbleScorer @</span>
+                <span className='title'>ScrabbleScorer</span>
+                <span className='at'>@</span>
                 <span className='algorithm'>
                     [<select>
                         {scoringAlgorithms && scoringAlgorithms.map((algorithm) => (
