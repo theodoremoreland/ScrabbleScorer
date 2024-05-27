@@ -1,0 +1,11 @@
+:root {
+  --color-primary: black;
+  --color-secondary: blue;
+
+  --color-primary-highlight: white;
+}
+
+html {
+  color: var(--color-primary-highlight);
+  background-color: var(--color-primary);
+}

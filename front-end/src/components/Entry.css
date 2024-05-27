@@ -1,0 +1,8 @@
+.Entry {
+  input {
+    color: var(--color-primary-highlight);
+    outline: transparent;
+    border: none;
+    background-color: transparent;
+  }
+}

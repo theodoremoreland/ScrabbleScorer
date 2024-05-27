@@ -25,6 +25,7 @@ _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 - Express
 - HTML
 - CSS
+- axios
 - check-word
 - vite
 
@@ -38,17 +39,17 @@ _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 
 ### Menu
 
-<img src="presentation/1.PNG" width="900">
+<img src="presentation/1.PNG" width="600">
 
 ### Scrabble (Algo 1)
 
 <img src="presentation/2.PNG" width="600">
-<img src="presentation/3.PNG" width="700">
+<img src="presentation/3.PNG" width="600">
 
 ### Simple Score (Algo 2)
 
-<img src="presentation/4.PNG" width="700">
+<img src="presentation/4.PNG" width="600">
 
 ### Bonus Vowels (Algo 3)
 
-<img src="presentation/5.PNG" width="700">
+<img src="presentation/5.PNG" width="600">
