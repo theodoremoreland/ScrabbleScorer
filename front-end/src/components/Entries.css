@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 5px;
+  margin-bottom: 25px;
 
   header {
     display: flex;
@@ -30,6 +31,11 @@
     font-family: custom-regular, sans-serif;
     background-color: transparent;
     border: none;
+
+    &:hover,
+    &:focus {
+      filter: brightness(1.4);
+    }
 
     option {
       cursor: pointer;

@@ -8,14 +8,13 @@ import { useQuery } from '@tanstack/react-query';
 import getScore from '../http/getScore';
 import { ScoringAlgorithm } from '../types/types';
 
-// Styles
-import './Entry.css';
-
 interface Props {
+    entryKey: string;
     scoringAlgorithms: ScoringAlgorithm[];
+    addEntry?: () => void;
 }
 
-const Entry = ({ scoringAlgorithms }: Props): ReactElement => {
+const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [word, setWord] = useState<string | undefined>();
@@ -28,7 +27,7 @@ const Entry = ({ scoringAlgorithms }: Props): ReactElement => {
     }, []);
 
     return (
-        <div className='Entry'>
+        <div key={entryKey} className='Entry'>
             <header>
                 <span className='title'>ScrabbleScorer</span>
                 <span className='at'>@</span>
@@ -56,6 +55,7 @@ const Entry = ({ scoringAlgorithms }: Props): ReactElement => {
                     onKeyUp={(e) => {
                         if (e.key === 'Enter' && inputRef.current?.value) {
                             setWord(inputRef.current?.value);
+                            addEntry && addEntry();
                         }
                     }}
                 />

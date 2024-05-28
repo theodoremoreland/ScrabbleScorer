@@ -1,10 +1,10 @@
-import { ReactElement } from 'react';
+import { ReactElement, Fragment } from 'react';
 
 // Third party
 import { useQuery } from '@tanstack/react-query';
 
 // Components
-import Entry from './components/Entry';
+import Entries from './components/Entries';
 
 // Custom
 import { ScoringAlgorithm } from './types/types';
@@ -14,7 +14,11 @@ import getScoringAlgorithms from './http/getScoringAlgorithms';
 import './App.css';
 
 const App = (): ReactElement => {
-  const { data: scoringAlgorithms } = useQuery({queryKey: ['scoringAlgorithms'], queryFn: getScoringAlgorithms, staleTime: Infinity});
+  const { data: scoringAlgorithms } = useQuery({
+    queryKey: ['scoringAlgorithms'], 
+    queryFn: getScoringAlgorithms, 
+    staleTime: Infinity
+  });
 
   return (
     <div className="App">
@@ -26,18 +30,18 @@ const App = (): ReactElement => {
           { 
             scoringAlgorithms.map(
               (algorithm: ScoringAlgorithm) => 
-                <>
+                <Fragment key={algorithm.name}>
                   {' '}
                   [<span className='algorithm-name'>{algorithm.name}</span>]
                   {' '}
                   <span className='algorithm-description'>{algorithm.description}</span>
-                </>
+                </Fragment>
             )
           }
         </p>
       }
       {
-        scoringAlgorithms && <Entry scoringAlgorithms={scoringAlgorithms} />
+        scoringAlgorithms && <Entries scoringAlgorithms={scoringAlgorithms} />
       }
     </div>
   )
