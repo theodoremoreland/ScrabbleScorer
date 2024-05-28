@@ -18,4 +18,5 @@ html {
   font-family: custom-regular, sans-serif;
   color: var(--color-primary-font);
   background-color: var(--color-primary);
+  overflow-x: hidden;
 }

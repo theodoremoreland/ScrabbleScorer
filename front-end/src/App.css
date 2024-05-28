@@ -1,3 +1,11 @@
 .App {
   padding: 1rem;
+
+  p {
+    max-width: 75ch;
+  }
+
+  span.algorithm-name {
+    color: var(--color-tertiary);
+  }
 }

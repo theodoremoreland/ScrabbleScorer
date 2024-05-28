@@ -6,19 +6,22 @@ import { useQuery } from '@tanstack/react-query';
 
 // Custom
 import getScore from '../http/getScore';
-import getScoringAlgorithms from '../http/getScoringAlgorithms';
+import { ScoringAlgorithm } from '../types/types';
 
 // Styles
 import './Entry.css';
 
-const Entry = (): ReactElement => {
+interface Props {
+    scoringAlgorithms: ScoringAlgorithm[];
+}
+
+const Entry = ({ scoringAlgorithms }: Props): ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [word, setWord] = useState<string | undefined>();
     const [scoringAlgorithmId, setScoringAlgorithmId] = useState<number>(1);
 
     const { data: score } = useQuery({ queryKey: ['score', word, scoringAlgorithmId], queryFn: () => getScore({ word: word as string, scoringAlgorithmId }), enabled: Boolean(word)});
-    const { data: scoringAlgorithms } = useQuery({queryKey: ['scoringAlgorithms'], queryFn: getScoringAlgorithms});
 
     useEffect(() => {
         inputRef.current?.focus();
