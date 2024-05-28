@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useRef, useEffect } from "react";
 
 // Components
 import Entry from "./Entry";
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const Entries = ({ scoringAlgorithms }: Props): ReactElement => {
+    const containerRef = useRef<HTMLDivElement>(null);
     const [entryIds, setEntryIds] = useState<number[]>([1]);
 
     const addEntry = (): void => {
@@ -21,8 +22,15 @@ const Entries = ({ scoringAlgorithms }: Props): ReactElement => {
         setEntryIds([...entryIds, newEntryId]);
     }
 
+    useEffect(() => {
+        if (containerRef.current) {
+            window.scrollTo(0, containerRef.current.scrollHeight + 100);
+        }
+
+    }, [entryIds.length]);
+
     return (
-        <div className="Entries">
+        <div className="Entries" ref={containerRef}>
             {
                 entryIds.map((entry) => (
                     <Entry

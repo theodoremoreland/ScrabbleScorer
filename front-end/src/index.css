@@ -20,3 +20,9 @@ html {
   background-color: var(--color-primary);
   overflow-x: hidden;
 }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
