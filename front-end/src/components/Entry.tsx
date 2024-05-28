@@ -5,7 +5,6 @@ import { ReactElement, useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 // Custom
-import { ScoringAlgorithmName } from '../types/types';
 import getScore from '../http/getScore';
 import getScoringAlgorithms from '../http/getScoringAlgorithms';
 
@@ -16,9 +15,9 @@ const Entry = (): ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [word, setWord] = useState<string | undefined>();
-    const [scoringAlgorithmName, setScoringAlgorithmName] = useState<ScoringAlgorithmName>(ScoringAlgorithmName.Scrabble);
+    const [scoringAlgorithmId, setScoringAlgorithmId] = useState<number>(1);
 
-    const { data: score } = useQuery({ queryKey: ['score', word, scoringAlgorithmName], queryFn: () => getScore({ word: word as string, scoringAlgorithmName }), enabled: Boolean(word)});
+    const { data: score } = useQuery({ queryKey: ['score', word, scoringAlgorithmId], queryFn: () => getScore({ word: word as string, scoringAlgorithmId }), enabled: Boolean(word)});
     const { data: scoringAlgorithms } = useQuery({queryKey: ['scoringAlgorithms'], queryFn: getScoringAlgorithms});
 
     useEffect(() => {
@@ -32,12 +31,12 @@ const Entry = (): ReactElement => {
                 <span className='at'>@</span>
                 <span className='algorithm'>
                     [
-                    <select onChange={(e) => setScoringAlgorithmName(e.target.value as ScoringAlgorithmName)}>
+                    <select onChange={(e) => setScoringAlgorithmId(Number(e.target.value))}>
                         {scoringAlgorithms && scoringAlgorithms.map((algorithm) => (
                             <option
                                 title={algorithm.description}
                                 key={algorithm.name}
-                                value={algorithm.name}
+                                value={algorithm.id}
                             >
                                 {algorithm.name}
                             </option>

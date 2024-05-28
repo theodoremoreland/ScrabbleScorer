@@ -10,7 +10,7 @@ import cors from "cors";
 import { 
   scoringAlgorithms,
   ScoringAlgorithmName,
-  isScoringAlgorithmName,
+  isValidScoringAlgorithmId,
   scoreWord,
 } from "./modules/scoringAlgorithms";
 
@@ -34,27 +34,34 @@ app.get("/scoring-algorithms", (_, res) => {
 
 app.get("/score-word", (req, res) => {
   const word = req.query.word;
-  const scoringAlgorithmName = req.query.scoringAlgorithmName;
+  const scoringAlgorithmId = req.query.scoringAlgorithmId ? Number(req.query.scoringAlgorithmId) : undefined;
 
-  if (!word || !scoringAlgorithmName) {
+  if (!word || !scoringAlgorithmId) {
     return res
       .status(400)
-      .send("Query parameters 'word' and 'scoringAlgorithmName' are required.");
+      .send("Query parameters 'word' and 'scoringAlgorithmId' are required.");
   }
   
-  if (typeof word !== "string" || typeof scoringAlgorithmName !== "string") {
+  if (typeof word !== "string") {
     return res
       .status(400)
-      .send("Query parameters 'word' and 'scoringAlgorithmName' must be strings.");
+      .send(`Query parameter: "word" must be a string.`);
   }
 
-  if (!isScoringAlgorithmName(scoringAlgorithmName)) {
+  if (typeof scoringAlgorithmId !== "number") {
     return res
       .status(400)
-      .send(`"${scoringAlgorithmName}" is not a valid scoring algorithm. Must be one of ${Object.values(ScoringAlgorithmName).join(", ")}.`);
+      .send(`Query parameter: "scoringAlgorithmId" must be a number.`);
+  }
+
+  if (!isValidScoringAlgorithmId(scoringAlgorithmId)) {
+    return res
+      .status(400)
+      .send(`"${scoringAlgorithmId}" is not a valid scoring algorithm ID. Must be one of ${scoringAlgorithms.map(algorithm => algorithm.id).join(', ')}.`);
   }
 
   try {
+    const scoringAlgorithmName: ScoringAlgorithmName = scoringAlgorithms.find(algorithm => algorithm.id === scoringAlgorithmId)?.name as ScoringAlgorithmName;
     const score: number = scoreWord(word, scoringAlgorithmName);
 
     return res

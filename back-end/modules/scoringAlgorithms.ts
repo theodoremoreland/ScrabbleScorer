@@ -16,6 +16,7 @@ export enum ScoringAlgorithmName {
 }
 
 type ScoringAlgorithm = {
+  id: number;
   name: ScoringAlgorithmName;
   description: string;
   scoreFunction: (word: string) => number;
@@ -25,6 +26,10 @@ const words = checkWord("en");
 
 export const isScoringAlgorithmName = (name: string): name is ScoringAlgorithmName => {
   return name in ScoringAlgorithmName;
+};
+
+export const isValidScoringAlgorithmId = (id: number): boolean => {
+  return scoringAlgorithms.some((algorithm) => algorithm.id === id);
 };
 
 const transform = (oldScoreKey: OldScoreKey): NewScoreKey => {
@@ -68,6 +73,7 @@ const scoreVowel = (char: string): 0 | 1 | 3 => {
 };
 
 const scrabbleAlgorithm: ScoringAlgorithm = {
+  id: 1,
   name: ScoringAlgorithmName.Scrabble,
   description: "The traditional scoring algorithm.",
   scoreFunction: (word: string): number => {
@@ -81,11 +87,13 @@ const scrabbleAlgorithm: ScoringAlgorithm = {
   },
 };
 const simpleScoreAlgorithm: ScoringAlgorithm =   {
+  id: 2,
   name: ScoringAlgorithmName.SimpleScore,
   description: "Each letter is worth 1 point.",
   scoreFunction: (word: string): number => word.replace(" ", "").length,
 };
 const vowelBonusScoreAlgorithm: ScoringAlgorithm = {
+  id: 3,
   name: ScoringAlgorithmName.BonusVowels,
   description: "Vowels are 3 pts, consonants are 1pt.",
   scoreFunction: (word: string): number => {

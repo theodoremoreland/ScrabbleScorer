@@ -5,6 +5,7 @@ export enum ScoringAlgorithmName {
 }
 
 export type ScoringAlgorithm = {
+    id: number;
     name: ScoringAlgorithmName;
     description: string;
     scoreFunction: (word: string) => number;
