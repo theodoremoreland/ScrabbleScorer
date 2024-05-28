@@ -88,7 +88,7 @@
   }
 
   .letter {
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: bold;
     color: rgb(82, 45, 0);
     background-color: #c7a056;
@@ -97,6 +97,12 @@
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
       rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .letter {
+      font-size: 1rem;
+    }
   }
 
   .algorithm-reflect {
