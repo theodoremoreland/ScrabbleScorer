@@ -38,7 +38,17 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
                 <span className='at'>@</span>
                 <span className='algorithm'>
                     [
-                    <select onChange={(e) => setScoringAlgorithmId(Number(e.target.value))}>
+                    <select 
+                        onChange={(e) => {
+                            const input: HTMLElement | null = inputRef.current;
+
+                            if (input && !input.classList.contains('disabled')) {
+                                input.focus();
+                            }
+
+                            setScoringAlgorithmId(Number(e.target.value));
+                        }}
+                    >
                         {scoringAlgorithms && scoringAlgorithms.map((algorithm) => (
                             <option
                                 title={algorithm.description}
