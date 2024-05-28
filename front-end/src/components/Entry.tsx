@@ -60,7 +60,7 @@ const Entry = ({ scoringAlgorithms }: Props): ReactElement => {
                     }}
                 />
             </div>
-            {score && word &&
+            {score && word && scoringAlgorithmId &&
             <div className='results'>
                 <ul className='letters'>
                     {word.split('').map((letter, index) => (
@@ -73,6 +73,7 @@ const Entry = ({ scoringAlgorithms }: Props): ReactElement => {
                     ))}
                 </ul>
                 <span>is worth {score.score} points!</span>
+                <span className='algorithm-reflect'>({scoringAlgorithms.find(algorithm => algorithm.id === scoringAlgorithmId)?.name})</span>
             </div>
             }
         </div>
