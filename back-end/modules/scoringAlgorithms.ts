@@ -75,7 +75,7 @@ const scoreVowel = (char: string): 0 | 1 | 3 => {
 const scrabbleAlgorithm: ScoringAlgorithm = {
   id: 1,
   name: ScoringAlgorithmName.Scrabble,
-  description: "The traditional scoring algorithm.",
+  description: "The traditional algorithm, awards points relative to the letter's rarity.",
   scoreFunction: (word: string): number => {
     let points: number = 0;
 
