@@ -56,6 +56,9 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
                         if (e.key === 'Enter' && inputRef.current?.value) {
                             setWord(inputRef.current?.value);
                             addEntry && addEntry();
+
+                            inputRef.current.disabled = true;
+                            inputRef.current.classList.add('disabled');
                         }
                     }}
                 />

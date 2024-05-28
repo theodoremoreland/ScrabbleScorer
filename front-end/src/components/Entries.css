@@ -22,6 +22,10 @@
     outline: transparent;
     border: none;
     background-color: transparent;
+
+    &.disabled {
+      cursor: not-allowed;
+    }
   }
 
   select {
