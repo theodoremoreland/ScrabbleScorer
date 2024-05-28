@@ -20,7 +20,12 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
     const [word, setWord] = useState<string | undefined>();
     const [scoringAlgorithmId, setScoringAlgorithmId] = useState<number>(1);
 
-    const { data: score } = useQuery({ queryKey: ['score', word, scoringAlgorithmId], queryFn: () => getScore({ word: word as string, scoringAlgorithmId }), enabled: Boolean(word)});
+    const { data: score } = useQuery({
+        queryKey: ['score', word, scoringAlgorithmId], 
+        queryFn: () => getScore({ word: word as string, scoringAlgorithmId }),
+        staleTime: Infinity,
+        enabled: Boolean(word)
+    });
 
     useEffect(() => {
         inputRef.current?.focus();
