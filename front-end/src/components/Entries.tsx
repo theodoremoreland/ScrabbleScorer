@@ -23,11 +23,22 @@ const Entries = ({ scoringAlgorithms }: Props): ReactElement => {
     }
 
     useEffect(() => {
-        if (containerRef.current) {
-            window.scrollTo(0, containerRef.current.scrollHeight + 100);
-        }
+        if (document.scrollingElement) {
+            const ro: ResizeObserver = new ResizeObserver(() => {
+                if (document.scrollingElement) {
+                    document.scrollingElement.scrollTop =
+                    document.scrollingElement.scrollHeight;
+                }
+            });
 
-    }, [entryIds.length]);
+            // Observe the scrollingElement for when the window gets resized
+            ro.observe(document.scrollingElement);
+
+            return () => {
+                ro.disconnect();
+            };
+        }
+    }, []);
 
     return (
         <div className="Entries" ref={containerRef}>

@@ -4,7 +4,10 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 5px;
-  padding-bottom: 25px;
+
+  &:not(:last-child) {
+    padding-bottom: 25px;
+  }
 
   header {
     display: flex;
