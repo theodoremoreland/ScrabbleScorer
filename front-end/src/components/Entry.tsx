@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 // Custom
 import getScore from '../http/getScore';
+import getDefinition from '../http/getDefinition';
 import { ScoringAlgorithm } from '../types/types';
 
 interface Props {
@@ -17,8 +18,9 @@ interface Props {
 const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const [word, setWord] = useState<string | undefined>();
+    const [word, setWord] = useState<string | undefined>(undefined);
     const [scoringAlgorithmId, setScoringAlgorithmId] = useState<number>(1);
+    const [definition, setDefinition] = useState<string | undefined>(undefined);
 
     const { data: score } = useQuery({
         queryKey: ['score', word, scoringAlgorithmId], 
@@ -27,9 +29,22 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
         enabled: Boolean(word)
     });
 
+    const { data: definitionData } = useQuery({
+        queryKey: ['definition', word], 
+        queryFn: () => getDefinition({ word: word as string }),
+        staleTime: Infinity,
+        enabled: Boolean(word) && Boolean(score)
+    });
+
     useEffect(() => {
         inputRef.current?.focus();
     }, []);
+
+    useEffect(() => {
+        if (definitionData) {
+            setDefinition(definitionData.meanings[0]?.definitions[0]?.definition);
+        }
+    }, [definitionData]);
 
     return (
         <div key={entryKey} className='Entry'>
@@ -80,7 +95,7 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
             </div>
             {score && word && scoringAlgorithmId &&
             <div className='results'>
-                <ul className='letters'>
+                <ul className='letters' title={definition || undefined}>
                     {word.split('').map((letter, index) => (
                         <li 
                             key={`${letter}@${index}`}

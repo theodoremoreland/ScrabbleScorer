@@ -87,6 +87,10 @@
     padding: 0;
   }
 
+  .letters:hover {
+    cursor: default;
+  }
+
   .letter {
     font-size: 0.7rem;
     font-weight: bold;
