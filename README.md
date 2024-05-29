@@ -8,6 +8,8 @@ A program that accepts user input in the form of a word and returns a Scrabble s
 
 _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 
+<img src="presentation/thumbnail.png" width="600">
+
 ## Table of Contents
 
 - [Technologies Used](#technologies-used)
