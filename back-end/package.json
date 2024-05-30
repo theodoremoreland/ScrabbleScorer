@@ -1,5 +1,5 @@
 {
-  "main": "server.ts",
+  "main": "server.js",
   "dependencies": {
     "check-word": "^1.1.0",
     "cors": "^2.8.5",
@@ -7,7 +7,8 @@
     "typescript": "^5.4.5"
   },
   "scripts": {
-    "start": "node server.ts",
+    "start": "node server.js",
+    "dev": "node dist/server.js",
     "build": "tsc"
   },
   "devDependencies": {
