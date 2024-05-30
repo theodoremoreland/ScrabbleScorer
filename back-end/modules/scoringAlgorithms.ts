@@ -95,7 +95,7 @@ const simpleScoreAlgorithm: ScoringAlgorithm =   {
 const vowelBonusScoreAlgorithm: ScoringAlgorithm = {
   id: 3,
   name: ScoringAlgorithmName.BonusVowels,
-  description: "Vowels are 3 pts, consonants are 1pt.",
+  description: "Vowels are 3 points, consonants are 1 point.",
   scoreFunction: (word: string): number => {
     let points: number = 0;
 
