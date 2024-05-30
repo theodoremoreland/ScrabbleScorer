@@ -84,7 +84,9 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
                     type="text"
                     onKeyUp={(e) => {
                         if (e.key === 'Enter' && inputRef.current?.value) {
-                            setWord(inputRef.current?.value);
+                            const word: string = inputRef.current.value.trim();
+
+                            setWord(word);
                             addEntry && addEntry();
 
                             inputRef.current.disabled = true;
