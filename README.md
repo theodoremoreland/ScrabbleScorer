@@ -90,16 +90,16 @@ cd back-end/ && node dist/server.js
 #### With Node
 
 1. Clone this repository.
-2. `cd` into `/server` directory
+2. `cd` into `/cli` directory
 
 ```
-cd /server
+cd /cli
 ```
 
 3. Start command line program
 
 ```
-npm run cli
+npm run start
 ```
 
 # Screenshots
