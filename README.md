@@ -6,6 +6,8 @@ A program that accepts user input in the form of a word and returns a Scrabble s
 - The second algorithm, "Simple Score" awards one point for every letter.
 - The third algorithm, "Bonus Vowels" awards three points for vowels, one point for consonants.
 
+Each submission must be recognized as a valid English word to be awarded points. Submissions are case insensitive.
+
 _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 
 <img src="presentation/thumbnail.png" width="600">
@@ -22,14 +24,15 @@ _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 
 - TypeScript
 - JavaScript
-- Node
 - React
+- Node
 - Express
 - HTML
 - CSS
 - axios
 - check-word
 - vite
+- Docker
 
 # Screenshots
 
