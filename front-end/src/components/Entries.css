@@ -70,10 +70,19 @@
 
   .results {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 0.3rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .results {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+    }
   }
 
   .letters {
@@ -92,7 +101,7 @@
   }
 
   .letter {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     font-weight: bold;
     color: rgb(82, 45, 0);
     background-color: #c7a056;
