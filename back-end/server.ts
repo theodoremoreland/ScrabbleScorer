@@ -62,7 +62,7 @@ app.get("/score-word", (req, res) => {
 
   try {
     const scoringAlgorithmName: ScoringAlgorithmName = scoringAlgorithms.find(algorithm => algorithm.id === scoringAlgorithmId)?.name as ScoringAlgorithmName;
-    const score: number = scoreWord(word, scoringAlgorithmName);
+    const score: number = scoreWord(word.trim(), scoringAlgorithmName);
 
     return res
       .status(200)
