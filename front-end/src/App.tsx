@@ -26,7 +26,7 @@ const App = (): ReactElement => {
       {
         scoringAlgorithms && 
         <p>
-          Enter a word to see its score using 1 of {scoringAlgorithms.length} algorithms. 
+          Enter a word to see its score relative to 1 of {scoringAlgorithms.length} algorithms. 
           { 
             scoringAlgorithms.map(
               (algorithm: ScoringAlgorithm) => 
