@@ -3,6 +3,7 @@ import { ReactElement, useState, useRef, useEffect } from 'react';
 
 // Third party
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 // Custom
 import getScore from '../http/getScoreData';
@@ -22,9 +23,10 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
     const [scoringAlgorithmId, setScoringAlgorithmId] = useState<number>(1);
     const [definition, setDefinition] = useState<string | undefined>(undefined);
 
-    const { data: scoreData } = useQuery({
+    const { data: scoreData, error: scoreDataError } = useQuery({
         queryKey: ['score', word, scoringAlgorithmId], 
         queryFn: () => getScore({ word: word as string, scoringAlgorithmId }),
+        retry: false,
         staleTime: Infinity,
         enabled: Boolean(word)
     });
@@ -39,6 +41,12 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
     useEffect(() => {
         inputRef.current?.focus();
     }, []);
+
+    useEffect(() => {
+        if (scoreDataError) {
+            toast.error(scoreDataError.message, { toastId: 'score-error' });
+        }
+    }, [scoreDataError]);
 
     useEffect(() => {
         if (definitionData) {
