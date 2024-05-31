@@ -51,7 +51,7 @@ Note: Confirm that Docker is running prior to proceeding and that port `8080` is
 2. cd into `docker` directory
 
 ```
-cd /docker
+cd docker/
 ```
 
 3. Build docker image and start container
@@ -90,10 +90,10 @@ cd back-end/ && node dist/server.js
 #### With Node
 
 1. Clone this repository.
-2. `cd` into `/cli` directory
+2. `cd` into `cli/` directory
 
 ```
-cd /cli
+cd cli/
 ```
 
 3. Start command line program
