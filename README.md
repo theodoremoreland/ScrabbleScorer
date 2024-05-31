@@ -17,6 +17,8 @@ _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 - [Technologies Used](#technologies-used)
 - [How to run locally](#how-to-run-locally)
   - [Via web app](#via-web-app)
+    - [With Docker](#with-docker)
+    - [With Node](#with-node)
   - [Via command line](#via-command-line)
 - [Screenshots](#screenshots)
   - [Desktop](#desktop)
@@ -88,7 +90,7 @@ cd back-end/ && node dist/server.js
 
 ### Via command line
 
-#### With Node
+**Note: requires Node**
 
 1. Clone this repository.
 2. `cd` into `cli/` directory
