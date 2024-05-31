@@ -12,6 +12,7 @@ import {
   ScoringAlgorithmName,
   isValidScoringAlgorithmId,
   scoreWord,
+  ScoreData
 } from "./modules/scoringAlgorithms";
 
 const port: number = process.env.PORT ? Number(process.env.PORT) : 8080;
@@ -62,11 +63,11 @@ app.get("/score-word", (req, res) => {
 
   try {
     const scoringAlgorithmName: ScoringAlgorithmName = scoringAlgorithms.find(algorithm => algorithm.id === scoringAlgorithmId)?.name as ScoringAlgorithmName;
-    const score: number = scoreWord(word.trim(), scoringAlgorithmName);
+    const scoreData: ScoreData = scoreWord(word.trim(), scoringAlgorithmName);
 
     return res
       .status(200)
-      .json({ score });
+      .json(scoreData);
   } catch (error) {
     const errorMessage: string = error instanceof Error ? error.message : String(error);
 

@@ -22,6 +22,14 @@ type ScoringAlgorithm = {
   scoreFunction: (word: string) => number;
 };
 
+export interface ScoreData {
+  wordScore: number;
+  letters: {
+      letter: string;
+      letterScore: number;
+  }[]
+}
+
 const words = checkWord("en");
 
 export const isScoringAlgorithmName = (name: string): name is ScoringAlgorithmName => {
@@ -113,7 +121,7 @@ export const scoringAlgorithms:  ScoringAlgorithm[] = [
   vowelBonusScoreAlgorithm,
 ];
 
-export const scoreWord = (word: string, scoringAlgorithmName: ScoringAlgorithmName): number => {
+export const scoreWord = (word: string, scoringAlgorithmName: ScoringAlgorithmName): ScoreData => {
   const scoringAlgorithm = scoringAlgorithms.find(
     (algorithm) => algorithm.name === scoringAlgorithmName
   );
@@ -134,5 +142,14 @@ export const scoreWord = (word: string, scoringAlgorithmName: ScoringAlgorithmNa
     throw new Error(`"${word}" is not a valid word.`);
   }
 
-  return scoringAlgorithm.scoreFunction(word);
+  const letters = word.split("").map((letter) => ({
+    letter,
+    letterScore: scoringAlgorithm.scoreFunction(letter),
+  }));
+  const wordScore = letters.reduce((acc, { letterScore }) => acc + letterScore, 0);
+
+  return {
+    wordScore,
+    letters,
+  };
 }

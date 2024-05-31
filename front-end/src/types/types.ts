@@ -10,3 +10,11 @@ export type ScoringAlgorithm = {
     description: string;
     scoreFunction: (word: string) => number;
 }
+
+export interface ScoreData {
+    wordScore: number;
+    letters: {
+        letter: string;
+        letterScore: number;
+    }[]
+}

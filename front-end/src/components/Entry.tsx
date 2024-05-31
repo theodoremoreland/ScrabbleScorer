@@ -5,7 +5,7 @@ import { ReactElement, useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 // Custom
-import getScore from '../http/getScore';
+import getScore from '../http/getScoreData';
 import getDefinition from '../http/getDefinition';
 import { ScoringAlgorithm } from '../types/types';
 
@@ -22,7 +22,7 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
     const [scoringAlgorithmId, setScoringAlgorithmId] = useState<number>(1);
     const [definition, setDefinition] = useState<string | undefined>(undefined);
 
-    const { data: score } = useQuery({
+    const { data: scoreData } = useQuery({
         queryKey: ['score', word, scoringAlgorithmId], 
         queryFn: () => getScore({ word: word as string, scoringAlgorithmId }),
         staleTime: Infinity,
@@ -33,7 +33,7 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
         queryKey: ['definition', word], 
         queryFn: () => getDefinition({ word: word as string }),
         staleTime: Infinity,
-        enabled: Boolean(word) && Boolean(score)
+        enabled: Boolean(word) && Boolean(scoreData)
     });
 
     useEffect(() => {
@@ -95,19 +95,21 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
                     }}
                 />
             </div>
-            {score && word && scoringAlgorithmId &&
+            {scoreData && word && scoringAlgorithmId &&
             <div className='results'>
+
                 <ul className='letters' title={definition || undefined}>
-                    {word.split('').map((letter, index) => (
+                    {scoreData.letters.map(({letter, letterScore}, index) => (
                         <li 
                             key={`${letter}@${index}`}
                             className='letter'
                         >
                             {letter.toUpperCase()}
+                            <span className='letter-score'>{letterScore}</span>
                         </li>
                     ))}
                 </ul>
-                <span>is worth {score.score} points!</span>
+                <span>is worth {scoreData.wordScore} points!</span>
                 <span className='algorithm-reflect'>({scoringAlgorithms.find(algorithm => algorithm.id === scoringAlgorithmId)?.name})</span>
             </div>
             }
