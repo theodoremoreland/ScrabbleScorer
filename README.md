@@ -34,6 +34,7 @@ _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 - CSS
 - axios
 - check-word
+- react-toastify
 - vite
 - Docker
 

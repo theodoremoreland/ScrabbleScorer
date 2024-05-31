@@ -3,6 +3,7 @@
         "codepaths",
         "Poetsen",
         "tanstack",
+        "toastify",
         "tsbuildinfo"
     ]
 }
