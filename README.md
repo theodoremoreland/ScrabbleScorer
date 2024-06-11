@@ -10,7 +10,7 @@ Each submission must be recognized as a valid English word to be awarded points.
 
 _This program was a homework assignment at LaunchCode's Lc101 (2019)_
 
-<img src="presentation/thumbnail.png" width="600">
+<img src="presentation/thumbnail.webp" width="600">
 
 ## Table of Contents
 
