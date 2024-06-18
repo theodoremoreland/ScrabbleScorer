@@ -110,7 +110,16 @@ npm run start
 
 ## Desktop
 
+### History of scores across each algorithm using different words
+<img src="https://dj8eg5xs13hf6.cloudfront.net/scrabble-scorer/1.png" width="700">
+
 ## Mobile
+
+### History of scores across each algorithm using different words
+<img src="https://dj8eg5xs13hf6.cloudfront.net/scrabble-scorer/2.png" width="250">
+
+### More history (scrolled down)
+<img src="https://dj8eg5xs13hf6.cloudfront.net/scrabble-scorer/3.png" width="250">
 
 ## Command line interface
 
