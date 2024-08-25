@@ -90,6 +90,7 @@ const Entry = ({ scoringAlgorithms, addEntry, entryKey }: Props): ReactElement =
                 <input
                     ref={inputRef}
                     type="text"
+                    spellcheck="true"
                     onKeyUp={(e) => {
                         if (e.key === 'Enter' && inputRef.current?.value) {
                             const word: string = inputRef.current.value.trim();
